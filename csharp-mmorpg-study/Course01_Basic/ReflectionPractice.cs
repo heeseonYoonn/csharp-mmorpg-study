@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 
 
-namespace TextRPG.Course
+namespace Course01_Basic
 {
     class ReflectionPractice
     {

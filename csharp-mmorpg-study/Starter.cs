@@ -1,4 +1,4 @@
-﻿using TextRPG.Course02;
+﻿using Course02_Algorithm;
 
 namespace TextRPG
 {
@@ -7,7 +7,7 @@ namespace TextRPG
         static void Main(string[] args)
         {
             // new GameStarter().Run();
-            new Algorithm().Run();
+            new LinkedListPractice().Run();
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TextRPG.Course
+namespace Course01_Basic
 {
     class LamdaPractice
     {

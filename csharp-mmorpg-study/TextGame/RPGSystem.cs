@@ -1,4 +1,4 @@
-﻿namespace TextRPG.Game
+﻿namespace TextGame
 {
     class RPGSystem
     {

@@ -1,4 +1,4 @@
-﻿namespace TextRPG.Course
+﻿namespace Course01_Basic
 {
     class EventPractice
     {
