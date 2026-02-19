@@ -30,6 +30,11 @@
             while (true)
             {
                 #region 프레임관리
+                /*
+                 * 프로세스는 입력 -> 로직 -> 렌더링 순으로 진행됨
+                 * 프레임 = 한번에 이 while문을 몇 번 돌건데?
+                 */
+
                 int currentTick = System.Environment.TickCount;
                 if (currentTick - lastTick < WAIT_TICK)
                     continue;
