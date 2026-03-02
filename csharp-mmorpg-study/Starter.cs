@@ -7,7 +7,7 @@ namespace TextRPG
         static void Main(string[] args)
         {
             // new GameStarter().Run();
-            new LinkedListPractice().Run();
+            new MapPractice().Run();
         }
     }
 }
