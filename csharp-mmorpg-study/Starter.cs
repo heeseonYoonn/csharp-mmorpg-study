@@ -1,4 +1,5 @@
 ﻿using Course02_Algorithm;
+using Course03_Graph;
 
 namespace TextRPG
 {
@@ -7,7 +8,7 @@ namespace TextRPG
         static void Main(string[] args)
         {
             // new GameStarter().Run();
-            new MapPractice().Run();
+            new Main().Run();
         }
     }
 }
