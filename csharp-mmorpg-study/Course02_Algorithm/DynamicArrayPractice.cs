@@ -25,10 +25,8 @@ namespace Course02_Algorithm
              */
             public void Add(T item)
             {
-                //TODO: 공간이 충분히 확보되었는지 확인
                 if (Count >= Capacity)
                 {
-                    //TODO: 공간을 다시 늘려서 확보
                     T[] newArray = new T[Count * 2]; //여기서 growth factor = 2
                     for (int i = 0; i < Count; i++)
                         newArray[i] = _data[i];
@@ -36,7 +34,6 @@ namespace Course02_Algorithm
                     _data = newArray;
                 }
 
-                //TODO: 공간에 데이터를 삽입
                 _data[Count] = item;
                 Count++;
             }
@@ -56,7 +53,6 @@ namespace Course02_Algorithm
              */
             public void RemoveAt(int index)
             {
-                //TODO: 해당 index에 값이 있는지 확인
                 if (_data[index] != null)
                 {
                     for (int i = index; i < Count - 1; i++)

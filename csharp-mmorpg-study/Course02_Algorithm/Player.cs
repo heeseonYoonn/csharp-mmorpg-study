@@ -8,58 +8,93 @@ namespace Course02_Algorithm
 {
     class Player
     {
-        public (int Y, int X) InitialPosition { get; private set; }
-        public (int Y, int X) CurrentPosition { get; private set; }
-        public (int Y, int X) Destination { get; private set; }
-        private Board _board;
-        int _direction;
+        public Point StartPosition { get; private set; }
+        public Point CurrentPosition { get; private set; }
+        public Point Destination { get; private set; }
 
-        public (int Y, int X)[] DirVector =
+
+        public Point _simulatedPosition;
+        List<Point> _simulatedPath = new();
+
+        private Board _board;
+        private int _direction;
+
+        private Point[] DirVector =
         {
-            (-1, 0) , //up
-            (0 , 1)  , //right
-            (1 , 0)  , //down
-            (0 ,-1)   //left
+            new Point(-1,0), // up
+            new Point(0,1),  // right
+            new Point(1,0),  // down
+            new Point(0,-1)  // left
         };
 
-
-
-        public Player((int Y, int X) initialPosition, Board board)
+        public Player(Point startPosition, Board board)
         {
             _board = board;
-            InitialPosition = initialPosition;
-            CurrentPosition = initialPosition;
+
+            StartPosition = startPosition;
+            CurrentPosition = startPosition;
+            _simulatedPosition = CurrentPosition;
             Destination = _board.Destination;
 
-            if (_board.Tiles[CurrentPosition.Y, CurrentPosition.X + 1] == TileType.Empty)
+            InitializeDirection();
+            SimulatePath();
+
+        }
+
+        public void SimulatePath()
+        {
+            //BOOKMARK: 경로 시뮬레이션
+            while (!_simulatedPosition.Equals(Destination))
+            {
+                if (CanTurnRight(_direction))
+                {
+                    _direction = TurnRight(_direction);
+                    SimulateMoveStep(_direction);
+                }
+                else if (CanMoveForward(_direction))
+                {
+                    SimulateMoveStep(_direction);
+                }
+                else
+                {
+                    _direction = TurnLeft(_direction);
+                    continue;
+                }
+
+                _simulatedPath.Add(_simulatedPosition);
+            }
+        }
+
+        public void InitializeDirection()
+        {
+            if (_board.Tiles[StartPosition.Y, StartPosition.X + 1] == TileType.Empty)
                 _direction = (int)Direction.Right;
+
             else
                 _direction = (int)Direction.Down;
-
-            while (false)
-            {
-                //TODO:여기로 길 찾기 로직 옮긴 후, 플레이어가 이동하는 지점을 리스트에 저장
-            }
-
         }
 
         public int TurnLeft(int direction) => (direction - 1 + 4) % 4;
         public int TurnRight(int direction) => (direction + 1) % 4;
 
 
-
-        public void Move(int direction)
+        public Point MoveStep(int direction, Point position)
         {
             var d = DirVector[direction];
-            CurrentPosition = (CurrentPosition.Y + d.Y, CurrentPosition.X + d.X);
+
+            return new Point(position.Y + d.Y, position.X + d.X);
         }
 
-
-        public bool CanMove(int directoin)
+        public void SimulateMoveStep(int direction)
         {
-            var d = DirVector[directoin];
-            int targetY = CurrentPosition.Y + d.Y;
-            int targetX = CurrentPosition.X + d.X;
+            _simulatedPosition = MoveStep(direction, _simulatedPosition);
+        }
+
+        public bool CanMove(int direction)
+        {
+            var d = DirVector[direction];
+            int targetY = _simulatedPosition.Y + d.Y;
+            int targetX = _simulatedPosition.X + d.X;
             return (_board.Tiles[targetY, targetX] == TileType.Empty);
         }
 
@@ -75,31 +110,25 @@ namespace Course02_Algorithm
         }
 
 
-        private const int MOVE_TICK = 100;
-        private int _sumTick;
+        const int MOVE_TICK = 100;
+        int _sumTick;
+        int _pathIndex = 0;
         public void Update(int deltaTick)
         {
-            if (CurrentPosition == Destination)
+            if (_pathIndex >= _simulatedPath.Count)
+                return;
+
+            if (CurrentPosition.Equals(Destination))
                 return;
 
             _sumTick += deltaTick;
+            if (_sumTick < MOVE_TICK)
+                return;
 
-            if (_sumTick > MOVE_TICK)
-            {
-                if (CanTurnRight(_direction))
-                {
-                    _direction = TurnRight(_direction);
-                    Move(_direction);
-                }
-                else if (CanMoveForward(_direction))
-                    Move(_direction);
 
-                else
-                    _direction = TurnLeft(_direction);
-
-                //초기화
-                _sumTick = 0;
-            }
+            CurrentPosition = _simulatedPath[_pathIndex];
+            _pathIndex++;
+            _sumTick = 0;
         }
     }
 }

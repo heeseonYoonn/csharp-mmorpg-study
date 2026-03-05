@@ -20,7 +20,7 @@ namespace Course02_Algorithm
         public void InitializeMap()
         {
             _board = new Board(25, 25);
-            _player = new Player((1,1), _board);
+            _player = new Player(new Point(1, 1), _board);
         }
 
         public void GameLoop()
@@ -48,7 +48,7 @@ namespace Course02_Algorithm
 
         }
 
-        
+
 
         public void Update(int deltaTick) => _player.Update(deltaTick);
 

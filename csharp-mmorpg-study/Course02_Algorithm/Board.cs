@@ -10,7 +10,7 @@ namespace Course02_Algorithm
         private int _width;
 
         public TileType[,] Tiles { get; private set; } // 배열
-        public (int X, int Y) Destination { get; private set; }
+        public Point Destination { get; private set; }
 
         private const char Shape = '\u25cf';
 
@@ -24,11 +24,11 @@ namespace Course02_Algorithm
             _width = width;
 
             Tiles = new TileType[_height, _width];
-            Destination = (_width - 2, _height - 2);
+            Destination = new Point(_height - 2, _width - 2);
 
             //GenerateByBinaryTreeMap();
             GenergateBySideWider();
-            
+
 
         }
 
@@ -146,7 +146,7 @@ namespace Course02_Algorithm
                     if (y == player.CurrentPosition.Y && x == player.CurrentPosition.X)
                         Console.ForegroundColor = ConsoleColor.Blue;
 
-                    else if(y == Destination.Y && x == Destination.X)
+                    else if (y == Destination.Y && x == Destination.X)
                         Console.ForegroundColor = ConsoleColor.Yellow;
 
                     else
