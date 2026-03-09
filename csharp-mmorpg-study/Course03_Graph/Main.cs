@@ -43,7 +43,7 @@ namespace Course03_Graph
             //TODO: now와 연결된 정점들을 하나씩 확인해서, [아직 미방문상태라면] 방문한다.
             int vertexCount = adj1.GetLength(0);
 
-            //BOOKMARK: 행렬 형태릐 그래프를 방문할 때
+            //BOOKMARK: 행렬 형태의 그래프를 방문할 때
             for (int neighbor = 0; neighbor < vertexCount; neighbor++)
             {
                 if (adj1[now, neighbor] == 0)
