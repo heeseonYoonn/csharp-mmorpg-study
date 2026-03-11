@@ -5,13 +5,20 @@
         public void Run()
         {
             /*
-             * DFS (Depth Fisrt Search)
-             * BFS (Breadth First Search)
+             * 알고리즘 실행
              */
+            //DFSPractice dfs= new DFSPractice();
+            //BFSPractice bfs= new BFSPractice();
+            //bfs.Run();
+            //dfs.Run();
 
-            DFSPractice dfs= new DFSPractice();
-            BFSPractice bfs= new BFSPractice();
-            bfs.Run();
+
+            /*
+             * 게임 실행
+             */
+            GameMap map = new GameMap();
+            map.GameLoop();
+
         }
 
     }

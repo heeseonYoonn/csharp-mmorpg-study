@@ -4,18 +4,14 @@ using System.Text;
 
 namespace Course02_Algorithm
 {
-    class MapPractice
+    /*
+     * ROLE: [길찾기] 게임 메타 설정
+     */
+    class GameMap
     {
 
         Board? _board;
         Player? _player;
-
-
-        public void Run()
-        {
-            InitializeMap();
-            GameLoop();
-        }
 
         public void InitializeMap()
         {
@@ -48,10 +44,7 @@ namespace Course02_Algorithm
 
         }
 
-
-
         public void Update(int deltaTick) => _player.Update(deltaTick);
-
         public void RenderFrame() => _board.Render(_player);
 
     }

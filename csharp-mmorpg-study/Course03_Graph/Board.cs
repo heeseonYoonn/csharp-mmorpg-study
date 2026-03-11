@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using TextGame;
 
-namespace Course02_Algorithm
+namespace Course03_Graph
 {
     class Board
     {
@@ -9,8 +9,8 @@ namespace Course02_Algorithm
         /*
          * ROLE: [길찾기] 게임 내 길 패턴 생성
          */
-        private int Height;
-        private int Width;
+        public int Height { get; private set; }
+        public int Width { get; private set; }
 
         public TileType[,] Tiles { get; private set; } // 배열
         public Point Destination { get; private set; }

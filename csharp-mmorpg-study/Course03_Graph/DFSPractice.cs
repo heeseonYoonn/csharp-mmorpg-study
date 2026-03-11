@@ -14,19 +14,19 @@ namespace Course03_Graph
 
         bool[] visited = new bool[6];
 
-        public void DFSMatrix(int now)
+        public void DFSMatrix(int current)
         {
-            Console.WriteLine(now);
-            //TODO: now 방문한다.
-            visited[now] = true;
+            Console.WriteLine(current);
+            //TODO: current 방문한다.
+            visited[current] = true;
 
-            //TODO: now와 연결된 정점들을 하나씩 확인해서, [아직 미방문상태라면] 방문한다.
+            //TODO: current와 연결된 정점들을 하나씩 확인해서, [아직 미방문상태라면] 방문한다.
             int vertexCount = Graph.matrix.GetLength(0);
 
             //BOOKMARK: 행렬 형태의 그래프를 방문할 때
             for (int neighbor = 0; neighbor < vertexCount; neighbor++)
             {
-                if (Graph.matrix[now, neighbor] == 0)
+                if (Graph.matrix[current, neighbor] == 0)
                     continue;
 
                 if (visited[neighbor])
@@ -37,15 +37,15 @@ namespace Course03_Graph
             }
         }
 
-        public void DFSList(int now)
+        public void DFSList(int current)
         {
-            Console.WriteLine(now);
+            Console.WriteLine(current);
 
-            //TODO: now 방문한다.
-            visited[now] = true;
+            //TODO: current 방문한다.
+            visited[current] = true;
 
-            //TODO: now와 연결된 정점들을 순차적으로 확인한다.
-            foreach (int next in Graph.list[now])
+            //TODO: current와 연결된 정점들을 순차적으로 확인한다.
+            foreach (int next in Graph.list[current])
             {
                 //TODO: 이미 방문한 정점이면 continue
                 if (visited[next])
@@ -69,7 +69,6 @@ namespace Course03_Graph
                 DFSList(i);
 
             }
-
         }
     }
 }

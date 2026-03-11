@@ -24,8 +24,8 @@ namespace Course03_Graph
             int[] parent = new int[6]; //해당 정점의 직전 정점
 
 
+            //방문 예정 대기열에 인큐
             Queue<int> queue = new Queue<int>();
-            //예약
             queue.Enqueue(start);
 
             //방문
@@ -35,15 +35,15 @@ namespace Course03_Graph
 
             while (queue.Count > 0)
             {
-                int now = queue.Dequeue();
-                Console.WriteLine(now);
+                int current = queue.Dequeue();
+                Console.WriteLine(current);
 
                 //TODO: 한번도 발견하지 않았으면 예약을 한다.
                 for (int next = 0; next < Graph.matrix.GetLength(0); next++)
                 {
 
                     //TODO: 연결 안되어있으면 컨티뉴
-                    if (Graph.matrix[now, next] == 0)
+                    if (Graph.matrix[current, next] == 0)
                         continue;
 
                     //TODO: 이미 발견한 곳이면 컨티뉴
@@ -54,8 +54,8 @@ namespace Course03_Graph
                     //큐에 넣음
                     queue.Enqueue(next);
                     found[next] = true;
-                    distance[next] = distance[now] + 1;
-                    parent[next] = now;
+                    distance[next] = distance[current] + 1;
+                    parent[next] = current;
                 }
 
             }

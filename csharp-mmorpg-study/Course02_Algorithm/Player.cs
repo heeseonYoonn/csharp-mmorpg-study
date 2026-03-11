@@ -6,6 +6,9 @@ using System.Text;
 
 namespace Course02_Algorithm
 {
+    /*
+     * ROLE: [길찾기] 플레이어
+     */
     class Player
     {
         public Point StartPosition { get; private set; }

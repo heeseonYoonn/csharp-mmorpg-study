@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Course02_Algorithm
+namespace Course03_Graph
 {
     /*
      * ROLE: [길찾기] 좌표 구조체
      */
-    struct Point
+    public struct Point
     {
-        public int Y { get;}
-        public int X { get;}
+        public int Y { get; }
+        public int X { get; }
 
-        public Point (int y, int x)
+        public Point(int y, int x)
         {
             Y = y;
             X = x;
