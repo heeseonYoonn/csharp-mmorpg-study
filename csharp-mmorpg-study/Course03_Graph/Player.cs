@@ -44,6 +44,7 @@ namespace Course03_Graph
             ApplyBFS();
         }
 
+
         private void ApplyBFS()
         {
             bool[,] found = new bool[_board.Height, _board.Width];
@@ -52,17 +53,17 @@ namespace Course03_Graph
             Queue<Point> queue = new Queue<Point>();
             queue.Enqueue(StartPosition);
             found[StartPosition.Y, StartPosition.X] = true;
-            parent[StartPosition.Y, StartPosition.X] = new Point(StartPosition.Y, StartPosition.X);
-
+            parent[StartPosition.Y, StartPosition.X] = StartPosition;
             while (queue.Count > 0)
             {
-                Point current = queue.Dequeue();
+                Point now = queue.Dequeue();
 
+                if (now.Equals(Destination))
+                    break;
 
-                //연결된 부분 확인
                 foreach (Point direction in DirVector.FourDirections)
                 {
-                    Point next = _navigator.GetNextPoint(current, direction);
+                    Point next = _navigator.GetNextPoint(now, direction);
 
                     if (!_navigator.CanMove(next))
                         continue;
@@ -70,14 +71,21 @@ namespace Course03_Graph
                     if (found[next.Y, next.X])
                         continue;
 
-                    queue.Enqueue(next);
                     found[next.Y, next.X] = true;
-                    parent[next.Y, next.X] = current;
-
+                    parent[next.Y, next.X] = now;
+                    queue.Enqueue(next);
                 }
             }
 
-            
+            Point current = Destination;
+            while (!current.Equals(StartPosition))
+            {
+                _simulatedPath.Add(current);
+                current = parent[current.Y, current.X];
+            }
+
+            _simulatedPath.Add(StartPosition);
+            _simulatedPath.Reverse();
 
         }
 
@@ -105,9 +113,6 @@ namespace Course03_Graph
             }
         }
 
-
-
-
         private void InitializeDirection()
         {
             if (_board.Tiles[StartPosition.Y, StartPosition.X + 1] == TileType.Empty)
@@ -116,9 +121,6 @@ namespace Course03_Graph
             else
                 _direction = (int)Direction.Down;
         }
-
-
-
 
         private Point MoveStep(int direction, Point position)
         {
@@ -132,9 +134,7 @@ namespace Course03_Graph
         }
 
 
-
-
-        const int MOVE_TICK = 100;
+        const int MOVE_TICK = 500;
         int _sumTick;
         int _pathIndex = 0;
         public void Execute(int deltaTick)
